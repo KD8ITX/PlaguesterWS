@@ -11,7 +11,7 @@ import org.mongodb.morphia.annotations.Id;
 public class Person {
 	@Id
 	private ObjectId id;
-	
+	private ObjectId userId;
 	private Gender gender;
 	private Date birthDate;
 	private String name;
@@ -54,6 +54,12 @@ public class Person {
 	}
 	public void setMotherId(ObjectId motherId) {
 		this.motherId = motherId;
+	}
+	public ObjectId getUserId() {
+		return userId;
+	}
+	public void setUserId(ObjectId userId) {
+		this.userId = userId;
 	}
 	
 	

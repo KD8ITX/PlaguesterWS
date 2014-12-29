@@ -36,7 +36,7 @@ public class UserController {
 	
 	@RequestMapping("/Person/Create")
     public Person Create(@RequestBody Person passedInPerson) {
-		PersonDAO.createPerson(passedInPerson);
+		PersonDAO.create(passedInPerson);
 		List<Person> people = PersonDAO.getAll();
 		
 		return passedInPerson;

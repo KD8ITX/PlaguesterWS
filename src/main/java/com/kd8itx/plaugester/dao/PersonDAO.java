@@ -14,12 +14,33 @@ public class PersonDAO {
 	
 	public PersonDAO() {}
 	
-	public static boolean createPerson (Person person) {
-        personDAO.save(person);
-        return true;
+	public static ObjectId create (Person person) {
+        ObjectId id = (ObjectId)personDAO.save(person).getId();
+        return id;
     }
 	
-public static List<Person> getAll() {
+	public static Person get(ObjectId id) {
+		Person person = personDAO.get(id);
+		return person;
+	}
+	
+	public static void update(Person person) {
+	//	personDAO.createQuery().field("id").equal(person.getId());
+		
+	//	personDAO.up
+		
+		//personDAO.createQuery(Person.class); //(Person.class).field(Mapper.ID_KEY).equal(person.getId());
+		//personDAO.update()
+	}
+	
+	public static boolean delete(ObjectId id) {
+		personDAO.deleteById(id);
+		
+		// Not sure what to check here, lets just say its all good
+		return true;
+	}
+	
+	public static List<Person> getAll() {
         List<Person> people = personDAO.find().asList();
         
         return people;
