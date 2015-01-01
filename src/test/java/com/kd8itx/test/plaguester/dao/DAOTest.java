@@ -1,16 +1,16 @@
-package com.kd8itx.plaguester.dao;
+package com.kd8itx.test.plaguester.dao;
 
 import org.bson.types.ObjectId;
 import org.junit.Assert;
 import org.junit.Test;
-import org.mongodb.morphia.dao.BasicDAO;
 
-import com.kd8itx.palguester.domain.Person;
-import com.kd8itx.plaugester.dao.MongoAccessor;
-import com.kd8itx.plaugester.dao.PersonDAO;
+import com.kd8itx.plaguester.dao.PersonDAO;
+import com.kd8itx.plaguester.dao.UserDAO;
+import com.kd8itx.plaguester.domain.Person;
+import com.kd8itx.plaguester.domain.User;
 
 public class DAOTest {
-	private static BasicDAO<Person, ObjectId> personDAO = MongoAccessor.createDAO(Person.class);
+	
 	
 	@Test
 	public void testMongoConnectivity() {
@@ -44,5 +44,7 @@ public class DAOTest {
 		boolean deletedCorrectly = PersonDAO.delete(updatedPersonId);
 		Assert.assertTrue(deletedCorrectly);
 	}
+	
+	
 	
 }

@@ -1,11 +1,8 @@
-package com.kd8itx.palguester.domain;
+package com.kd8itx.plaguester.domain;
 
 import java.util.Random;
 
-import org.apache.log4j.Logger;
-
 public class DNA {
-	private static final Logger log = Logger.getLogger(DNA.class);
 	
 	private DNAType dnaType;
 	private String dna;
@@ -25,8 +22,6 @@ public class DNA {
 				binNumber = "0" + binNumber;
 			}
 			dna += binNumber;
-			
-			//log.debug("DNA Chunk [" + binNumber + "]");
 		}
 		this.dnaType = dnaType;
 	}

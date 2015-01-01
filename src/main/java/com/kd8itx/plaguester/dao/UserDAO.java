@@ -1,11 +1,13 @@
-package com.kd8itx.plaugester.dao;
+package com.kd8itx.plaguester.dao;
 
 import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.dao.BasicDAO;
+import org.mongodb.morphia.query.Query;
 
-import com.kd8itx.palguester.domain.User;
+import com.kd8itx.plaguester.domain.Person;
+import com.kd8itx.plaguester.domain.User;
 
 public class UserDAO {
 
@@ -27,6 +29,13 @@ public class UserDAO {
 		userDAO.deleteById(id);
 		
 		// Not sure what to check here, lets just say its all good
+		return true;
+	}
+	
+	public static boolean deleteAll() {
+		Query<User> abc = userDAO.createQuery().field("id").notEqual("abc");
+		userDAO.deleteByQuery(abc);
+		
 		return true;
 	}
 	

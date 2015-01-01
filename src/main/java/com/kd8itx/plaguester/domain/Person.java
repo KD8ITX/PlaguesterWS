@@ -1,10 +1,7 @@
-package com.kd8itx.palguester.domain;
+package com.kd8itx.plaguester.domain;
 
 import java.security.SecureRandom;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.bson.types.ObjectId;
@@ -12,8 +9,7 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Indexed;
 
-import com.kd8itx.plaugester.dao.MongoAccessor;
-import com.kd8itx.plaugester.dao.PersonDAO;
+import com.kd8itx.plaguester.dao.PersonDAO;
 
 
 @Entity("Person")
@@ -33,16 +29,24 @@ public class Person {
 	@Indexed
 	private DNA[] dna;
 	
-	public Person() {
-		dna = new DNA[DNAType.values().length];
+	public Person() { }
+	
+	public Person(
+			ObjectId userId,
+			Gender gender,
+			String name,
+			ObjectId fatherId,
+			ObjectId motherId,
+			DNA[] dna) {
 		
-		int i = 0;
-		for (DNAType dnaType : DNAType.values()) {
-			dna[i] = new DNA(dnaType);
-			i++;
-		}
-		@SuppressWarnings("unused")
-		String a = "b";
+		this.userId = userId;
+		this.gender = gender;
+		this.name = name;
+		this.fatherId = fatherId;
+		this.motherId = motherId;
+		this.dna = dna;
+		
+		this.birthDate = new Date();
 	}
 	
 	public static DNA[] createNewDNA(ObjectId fatherId, ObjectId motherId) throws Exception {

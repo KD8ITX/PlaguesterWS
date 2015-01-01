@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kd8itx.palguester.domain.Person;
-import com.kd8itx.plaugester.dao.PersonDAO;
+import com.kd8itx.plaguester.dao.PersonDAO;
+import com.kd8itx.plaguester.domain.Person;
 
 @RestController
 public class PersonController {

@@ -1,4 +1,4 @@
-package com.kd8itx.palguester.domain;
+package com.kd8itx.plaguester.domain;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;

@@ -1,4 +1,4 @@
-package com.kd8itx.palguester.domain;
+package com.kd8itx.plaguester.domain;
 
 public enum Gender {
 	MALE,
