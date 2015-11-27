@@ -1,11 +1,11 @@
-package com.kd8itx.plaugester.dao;
+package com.kd8itx.plaguester.dao;
 
 import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.dao.BasicDAO;
 
-import com.kd8itx.plaugester.domain.User;
+import com.kd8itx.plaguester.domain.User;
 
 public class UserDAO {
 private static BasicDAO<User, ObjectId> userDAO = MongoAccessor.createDAO(User.class);

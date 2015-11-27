@@ -1,4 +1,4 @@
-package com.kd8itx.plaugester.domain;
+package com.kd8itx.plaguester.domain;
 
 import java.util.Date;
 

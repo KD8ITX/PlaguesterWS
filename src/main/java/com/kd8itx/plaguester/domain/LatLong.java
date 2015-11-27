@@ -1,17 +1,13 @@
-package com.kd8itx.plaugester.domain;
+package com.kd8itx.plaguester.domain;
 
+import org.bson.types.ObjectId;
 
 public class LatLong {
-	private String email;
+	private ObjectId personId;
 	private String lat;
 	private String lon;
 	
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
+	
 	public String getLat() {
 		return lat;
 	}
@@ -27,7 +23,13 @@ public class LatLong {
 	
 	
 	@Override public String toString() {
-		return "Email ["+this.email+"], Lat ["+this.lat+"], Long ["+this.lon+"]";
+		return "PersonId ["+this.personId+"], Lat ["+this.lat+"], Long ["+this.lon+"]";
+	}
+	public ObjectId getPersonId() {
+		return personId;
+	}
+	public void setPersonId(ObjectId personId) {
+		this.personId = personId;
 	}
 	
 	

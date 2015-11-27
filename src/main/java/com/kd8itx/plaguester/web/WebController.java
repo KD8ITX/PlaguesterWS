@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kd8itx.plaugester.dao.PersonDAO;
-import com.kd8itx.plaugester.domain.Person;
+import com.kd8itx.plaguester.dao.PersonDAO;
+import com.kd8itx.plaguester.domain.Person;
 
 @Controller
 public class WebController {
