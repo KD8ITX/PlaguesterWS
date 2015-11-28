@@ -32,7 +32,7 @@ public class PersonExternal {
 		}
 	}
 	
-	public Person getPerson() {
+	public Person backendPerson() {
 		Person person = new Person();
 		person.setBirthDate(this.birthDate);
 		if (this.fatherId != null) {

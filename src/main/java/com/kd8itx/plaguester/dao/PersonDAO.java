@@ -3,9 +3,11 @@ package com.kd8itx.plaguester.dao;
 import java.util.List;
 
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.Key;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
 import com.kd8itx.plaguester.domain.Person;
+import com.kd8itx.plaguester.domain.User;
 
 
 public class PersonDAO {
@@ -14,22 +16,35 @@ public class PersonDAO {
 	
 	public PersonDAO() {}
 	
-	public static boolean createPerson (Person person) {
-        personDAO.save(person);
-        return true;
+	public static ObjectId createPerson (Person person) {
+        Key<Person> abc = personDAO.save(person);
+        
+        return (ObjectId)abc.getId();
     }
 	
-public static List<Person> getAll(ObjectId userId) throws Exception {
+	public static List<Person> getAll(ObjectId userId) throws Exception {
 	
-	if (userId == null) {
-		throw new Exception("Missing userId");
+		if (userId == null) {
+			throw new Exception("Missing userId");
+		}
+		
+		Query<Person> q = personDAO.createQuery();
+		q.field("userId").equal(userId);
+		
+		List<Person> results = personDAO.find(q).asList();
+		    
+	    return results;
+    }
+	
+	public static Person get(ObjectId personId) {
+		Person person = personDAO.get(personId);
+		
+		return person;
 	}
 	
-	Query<Person> q = personDAO.createQuery();
-	q.field("userId").equal(userId);
-	
-	List<Person> results = personDAO.find(q).asList();
-	    
-    return results;
-    }
+	public static Boolean delete(ObjectId personId) {
+		personDAO.deleteById(personId);
+		
+		return true;
+	}
 }

@@ -1,12 +1,18 @@
 package com.kd8itx.plaguester.domain;
 
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Id;
 
 public class LatLong {
+	@Id
+	private ObjectId id;
 	private ObjectId personId;
 	private String lat;
 	private String lon;
 	
+	@Override public String toString() {
+		return "PersonId ["+this.personId+"], Lat ["+this.lat+"], Long ["+this.lon+"]";
+	}
 	
 	public String getLat() {
 		return lat;
@@ -21,10 +27,6 @@ public class LatLong {
 		this.lon = lon;
 	}
 	
-	
-	@Override public String toString() {
-		return "PersonId ["+this.personId+"], Lat ["+this.lat+"], Long ["+this.lon+"]";
-	}
 	public ObjectId getPersonId() {
 		return personId;
 	}

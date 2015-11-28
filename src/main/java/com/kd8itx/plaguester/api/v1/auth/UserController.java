@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
-import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -17,12 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kd8itx.plaguester.dao.PersonDAO;
 import com.kd8itx.plaguester.dao.UserDAO;
-import com.kd8itx.plaguester.domain.LatLong;
 import com.kd8itx.plaguester.domain.LoginResponseModel;
 import com.kd8itx.plaguester.domain.Person;
 import com.kd8itx.plaguester.domain.User;
-import com.kd8itx.plaguester.exception.LoginException;
-import com.kd8itx.security.UserSession;
 
 
 
@@ -73,17 +69,6 @@ public class UserController {
 		// Kill off the current session
 		request.getSession().invalidate();
 		
-		
 		return true;
     }
-	
-	@RequestMapping(value = "/V1/Geo/Update", method = RequestMethod.POST)
-    public Boolean LatLong(@RequestBody LatLong latLong, HttpServletRequest request) throws LoginException {
-		UserSession.validate(request);
-		
-		log.debug(latLong.toString());
-		
-		return true;
-    }
-	
 }
