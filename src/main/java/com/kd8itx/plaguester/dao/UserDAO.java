@@ -18,11 +18,6 @@ private static BasicDAO<User, ObjectId> userDAO = MongoAccessor.createDAO(User.c
 			return user;
 		}
 		
-		public static boolean createPerson (User user) {
-	        userDAO.save(user);
-	        return true;
-	    }
-		
 		public static List<User> getAll() {
 	        List<User> users = userDAO.find().asList();
 	        

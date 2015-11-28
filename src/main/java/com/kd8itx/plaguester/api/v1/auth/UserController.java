@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,8 @@ import com.kd8itx.plaguester.domain.LatLong;
 import com.kd8itx.plaguester.domain.LoginResponseModel;
 import com.kd8itx.plaguester.domain.Person;
 import com.kd8itx.plaguester.domain.User;
+import com.kd8itx.plaguester.exception.LoginException;
+import com.kd8itx.security.UserSession;
 
 
 
@@ -31,6 +34,9 @@ public class UserController {
 	@RequestMapping(value = "/V1/User/Login", method = RequestMethod.POST)
     public ResponseEntity<?> Login(@RequestBody User passedInUser, HttpServletRequest request) throws Exception {
         
+		// Clear out the existing user session for security
+		request.getSession().invalidate();
+		
 		if (passedInUser == null || StringUtils.isBlank(passedInUser.getUsername())) {
 			return new ResponseEntity<>("Bad Request", HttpStatus.BAD_REQUEST);
 		}
@@ -42,9 +48,9 @@ public class UserController {
 			
 		} else {
 			// TODO: Move this out of here into an actual real create routine
-			UserDAO.createPerson(passedInUser);
-			user = UserDAO.getByUsername(passedInUser.getUsername());
-			log.warn("FYI, we just created this user ["+passedInUser.getUsername()+"], this is just here for debugging purposes");
+			//UserDAO.createPerson(passedInUser);
+			//user = UserDAO.getByUsername(passedInUser.getUsername());
+			//log.warn("FYI, we just created this user ["+passedInUser.getUsername()+"], this is just here for debugging purposes");
 		}
 		
 		// Get "People" assigned to this user
@@ -62,27 +68,22 @@ public class UserController {
     }
 	
 	@RequestMapping("/V1/User/Logout")
-    public User Logout(@RequestBody User passedInUser) {
+    public Boolean Logout(HttpServletRequest request) {
         
-		User user = new User();
-		user.setUsername(passedInUser.getUsername());
+		// Kill off the current session
+		request.getSession().invalidate();
 		
-		return user;
-    }
-	
-	@RequestMapping(value = "/V1/Geo/Update", method = RequestMethod.POST)
-    public Boolean LatLong(@RequestBody LatLong latLong) {
-		log.debug(latLong.toString());
 		
 		return true;
     }
 	
-	@RequestMapping("/Person/Create")
-    public Person Create(@RequestBody Person passedInPerson) {
-		PersonDAO.createPerson(passedInPerson);
-		//List<Person> people = PersonDAO.getAll();
+	@RequestMapping(value = "/V1/Geo/Update", method = RequestMethod.POST)
+    public Boolean LatLong(@RequestBody LatLong latLong, HttpServletRequest request) throws LoginException {
+		UserSession.validate(request);
 		
-		return passedInPerson;
+		log.debug(latLong.toString());
+		
+		return true;
     }
 	
 }
