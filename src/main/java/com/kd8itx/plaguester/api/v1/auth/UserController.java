@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kd8itx.plaguester.dao.PersonDAO;
 import com.kd8itx.plaguester.dao.UserDAO;
-import com.kd8itx.plaguester.domain.LoginResponseModel;
 import com.kd8itx.plaguester.domain.Person;
 import com.kd8itx.plaguester.domain.User;
+import com.kd8itx.plaguester.domain.model.LoginResponseModel;
 
 
 

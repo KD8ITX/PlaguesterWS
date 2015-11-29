@@ -7,7 +7,6 @@ import org.mongodb.morphia.Key;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.Query;
 import com.kd8itx.plaguester.domain.Person;
-import com.kd8itx.plaguester.domain.User;
 
 
 public class PersonDAO {

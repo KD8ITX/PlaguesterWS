@@ -1,6 +1,8 @@
-package com.kd8itx.plaguester.domain;
+package com.kd8itx.plaguester.domain.model;
 
 import java.util.List;
+
+import com.kd8itx.plaguester.domain.Person;
 
 public class LoginResponseModel {
 	private String userId;

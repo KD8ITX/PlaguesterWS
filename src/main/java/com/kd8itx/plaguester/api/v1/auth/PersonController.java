@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kd8itx.plaguester.dao.PersonDAO;
-import com.kd8itx.plaguester.domain.PeopleModel;
 import com.kd8itx.plaguester.domain.Person;
 import com.kd8itx.plaguester.domain.external.PersonExternal;
+import com.kd8itx.plaguester.domain.model.PeopleModel;
 import com.kd8itx.plaguester.exception.LoginException;
 import com.kd8itx.security.UserSession;
 

@@ -1,4 +1,4 @@
-package com.kd8itx.plaguester.domain;
+package com.kd8itx.plaguester.domain.model;
 
 import java.util.List;
 
