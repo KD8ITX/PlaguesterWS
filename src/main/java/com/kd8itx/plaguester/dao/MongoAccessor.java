@@ -64,6 +64,7 @@ public class MongoAccessor {
                 }
                 
                 datastore = new DatastoreImpl(new Morphia(), mongo, dbname);
+                datastore.ensureIndexes();
                 mongo.getDB(dbname).command("ping"); //This will throw an exception if there is no connection to mongo
                 log.info("Connection established");
             } catch (Exception e) {

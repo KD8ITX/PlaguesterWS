@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.bson.types.ObjectId;
+
 import com.kd8itx.plaguester.domain.LatLong;
 import com.kd8itx.plaguester.domain.Route;
 
 public class RouteExternal {
 	private String id;
-	private String personId;
 	private List<LatLongExternal> points;
 	private Date startTime;
 	private Date endTime;
@@ -20,9 +21,6 @@ public class RouteExternal {
 		this.endTime = route.getEndTime();
 		if (route.getId() != null) {
 			this.id = route.getId().toString();
-		}
-		if (route.getPersonId() != null) {
-			this.personId = route.getPersonId().toString();
 		}
 		this.startTime = route.getStartTime();
 		
@@ -37,17 +35,31 @@ public class RouteExternal {
 		}
 	}
 	
+	public Route backendRoute(ObjectId personId) {
+		Route route = new Route();
+		route.setEndTime(this.endTime);
+		if (this.id != null) {
+			route.setId(new ObjectId(this.id));
+		}
+		route.setPersonId(personId);
+		route.setStartTime(this.startTime);
+		
+		List<LatLong> internalPoints = new ArrayList<LatLong>();
+		for (LatLongExternal latLong : this.points) {
+			internalPoints.add(new LatLong(latLong.getLat(), latLong.getLon(), latLong.getTime()));
+		}
+		if (internalPoints.isEmpty() == false) {
+			route.setPoints(internalPoints);
+		}
+		
+		return route;
+	}
+	
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
-	}
-	public String getPersonId() {
-		return personId;
-	}
-	public void setPersonId(String personId) {
-		this.personId = personId;
 	}
 	public List<LatLongExternal> getPoints() {
 		return points;

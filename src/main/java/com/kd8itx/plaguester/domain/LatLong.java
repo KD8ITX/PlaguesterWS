@@ -15,11 +15,11 @@ public class LatLong {
 		// Go with 5 decimal places, this should give 1 meter resolution
 		// http://stackoverflow.com/questions/15965166/what-is-the-maximum-length-of-latitude-and-longitude
 		BigDecimal latBD = new BigDecimal(lat);
-		latBD.movePointRight(5);
+		latBD = latBD.movePointRight(5);
 		this.lat = latBD.intValue();
 		
 		BigDecimal lonBD = new BigDecimal(lon);
-		lonBD.movePointRight(5);
+		lonBD = lonBD.movePointRight(5);
 		this.lon = lonBD.intValue();
 		
 		this.time = time;

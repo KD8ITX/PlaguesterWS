@@ -17,6 +17,12 @@ public class LatLongExternal {
 		this.time = latLong.getTime();
 	}
 	
+	public LatLong backendLatLong() {
+		LatLong latLong = new LatLong(this.lat, this.lon, this.time);
+		
+		return latLong;
+	}
+	
 	public String getLat() {
 		return lat;
 	}

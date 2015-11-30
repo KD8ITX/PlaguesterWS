@@ -27,13 +27,13 @@ public class PersonController {
 	
 	@RequestMapping(value = "/V1/Person/Create", method = RequestMethod.POST)
     public PersonExternal Create(@RequestBody PersonExternal personPassed, HttpServletRequest request) throws LoginException {
-		ObjectId userId = UserSession.validate(request);
+		UserSession session = UserSession.validate(request, false);
 		
 		// Convert from external objects to internal
 		Person person = personPassed.backendPerson();
 		
 		// Override passed in values with trusted ones
-		person.setUserId(userId);
+		person.setUserId(session.getUserId());
 		person.setId(null);
 		person.setBirthDate(new Date());
 
@@ -49,9 +49,9 @@ public class PersonController {
 	
 	@RequestMapping(value = "/V1/Person/GetAll", method = RequestMethod.POST)
     public PeopleModel GetAll(HttpServletRequest request) throws Exception {
-		ObjectId userId = UserSession.validate(request);
+		UserSession session = UserSession.validate(request, false);
 		
-		List<Person> peopleDb = PersonDAO.getAll(userId);
+		List<Person> peopleDb = PersonDAO.getAll(session.getUserId());
 		
 		// Loop over the people returned from the DB and convert them to external objects
 		List<PersonExternal> people = new ArrayList<PersonExternal>();
@@ -67,13 +67,13 @@ public class PersonController {
 	@RequestMapping(value = "/V1/Person/Delete", method = RequestMethod.POST)
 	// TODO: This method is a test method that will need removed later (used to keep DB clean with lots of jMeter usage)
     public Boolean Delete(@RequestBody PersonExternal person, HttpServletRequest request) throws Exception {
-		ObjectId userId = UserSession.validate(request);
+		UserSession session = UserSession.validate(request, false);
 		ObjectId deletePersonId = new ObjectId(person.getId());
 		
 		Person newPerson = PersonDAO.get(deletePersonId);
 		
 		// Make sure this person is tied to this user
-		if (newPerson == null || newPerson.getUserId().equals(userId) == false) {
+		if (newPerson == null || newPerson.getUserId().equals(session.getUserId()) == false) {
 			throw new SecurityException("You don't have rights to delete Person ["+person.getId()+"]");
 		}
 		
@@ -85,13 +85,13 @@ public class PersonController {
 	
 	@RequestMapping(value = "/V1/Person/Select", method = RequestMethod.POST)
     public Boolean Select(@RequestBody PersonExternal person, HttpServletRequest request) throws Exception {
-		ObjectId userId = UserSession.validate(request);
+		UserSession session = UserSession.validate(request, false);
 		ObjectId selectPersonId = new ObjectId(person.getId());
 		
 		Person newPerson = PersonDAO.get(selectPersonId);
 		
 		// Make sure this person is tied to this user
-		if (newPerson == null || newPerson.getUserId().equals(userId) == false) {
+		if (newPerson == null || newPerson.getUserId().equals(session.getUserId()) == false) {
 			throw new SecurityException("You don't have rights to select Person ["+person.getId()+"]");
 		}
 		
